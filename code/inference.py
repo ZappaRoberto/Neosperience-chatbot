@@ -32,7 +32,7 @@ def predict_fn(data, model):
     chat_history = []
     chat_history = torch.LongTensor(chat_history)
     
-    #create chat_history if generated_responses is empy
+    #create chat_history if generated_responses is empty
     if generated_responses:
                     
         for user_input,responses in zip(past_user_inputs,generated_responses):
@@ -66,7 +66,7 @@ def predict_fn(data, model):
 
 def output_fn(chat_history, accept):
     
-    #inizialize data structure
+    #initialize data structure
     prediction = {"generated_text": "", 
                   "conversation": {
                       "past_user_inputs": [], 

@@ -1,0 +1,544 @@
+/* Reset default styles */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'Biotif';
+    src: url('fonts/Biotif/BiotifRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Biotif';
+    src: url('fonts/Biotif/BiotifBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('fonts/Spacemono/SpaceMonoRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Variables */
+:root {
+    --primary-color: #0052EE;
+    --primary-color-light: #D6E4FC;
+    --accent-color: #dba4fd;
+    --background-color: rgba(0, 82, 238, 7%);
+    --header-height: 3.5rem;
+    --input-height: 2.5rem;
+    --input-padding: 1.5rem;
+    --shade-height: 2rem;
+    --max-width: 800px;
+}
+
+/* Mobile */
+/* Generics */
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+body {
+    font-size: 20px;
+    height: 100vh;
+    display: flex;
+    line-height: 2;
+    flex-direction: column;
+    font-family: "Biotif";
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--background-color);
+}
+
+.gradient-border {
+    background: var(--primary-color);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* Header */
+
+.header {
+    box-sizing: border-box;
+    min-height: var(--header-height);
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    padding: 0.5rem 2rem;
+    backdrop-filter: blur(100px);
+    border-color: rgba( 255, 255, 255, 0.18 );
+    transform-origin: 0% 0%;
+    background: white;
+    backdrop-filter: blur( 5.5px );
+    -webkit-backdrop-filter: blur( 5.5px );
+    box-shadow: #628fbb4d 0px 0px 64px;
+}
+
+.header .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header .logo {
+    background-image: url("./assets/images/logo.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 15rem;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+    bottom: 3px;
+}
+
+.header .audio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    padding: 9px;
+    cursor: pointer;
+    backdrop-filter: blur(1px);
+    background-color: #FEF5F9;
+}
+
+.header .audio.stop {
+    border-color: var(--primary-color);
+}
+
+.header .audio.stop::before {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(-90deg, var(--primary-color), #FD808B);;
+    position: absolute;
+    transform: rotate(-45deg);
+    bottom: 7px;
+    left: 7px;
+    transform-origin: 0%;
+    animation: grow 0.3s linear;
+}
+
+.header .gradient-border {
+    position: absolute;
+}
+
+/* Chat body */
+
+.chat-bg {
+    flex: 1;
+    padding: 2rem;
+    margin-top: 76px;
+    margin-bottom: 118px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.chat-body .message-picture:first-child {
+    margin-top: 2rem;
+}
+
+.chat-body .message {
+    font-family: 'Biotif', sans-serif;
+    padding: 1rem 1.5rem;
+    line-height: 1.5;
+    max-width: 60%;
+    width: fit-content;
+    height: fit-content;
+    box-shadow: rgb(149 157 165 / 30%) 0px 8px 16px;
+    animation: .6s ease-in-out enterMessage;
+    animation-fill-mode: backwards;
+    animation-delay: 0.4s;
+    letter-spacing: 0.7px;
+    position: relative;
+    border-radius: 16px;
+}
+
+.chat-body .message.fixed {
+    width: 40px;
+    height: 30px;
+}
+
+.chat-body .message.my-message {
+    margin-left: auto;
+    background: var(--primary-color);
+    color: #fff;
+    transform-origin: 100% 0%;
+    margin-right: 24px;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-body .message.bot-message {
+    color: var(--primary-color);
+    text-align: left;
+    font-family: 'Biotif', sans-serif;
+    transform-origin: 0% 0%;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    margin-left: 20px;
+    border-bottom-left-radius: 4px;
+}
+
+time {
+    color: var(--primary-color);
+    font-size: 0.7rem;
+    animation: fadeIn 0.8s linear;
+    font-weight: bold;
+}
+
+.input-container {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--primary-color);
+    background: var(--background-color);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(100px);
+    border-color: rgba( 255, 255, 255, 0.18 );
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+    transform-origin: 0% 0%;
+    background: rgba( 255, 255, 255, 0.2 );
+    backdrop-filter: blur( 5.5px );
+    -webkit-backdrop-filter: blur( 5.5px );
+    box-shadow: #628fbb4d 0px 0px 64px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.input-container .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-container input {
+    box-sizing: border-box;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 100%;
+    margin-right: 2rem;
+    padding: 1rem 2rem;
+    font-family: 'Biotif', sans-serif;
+    font-size: 20px;
+    border-radius: 2rem;
+    backdrop-filter: blur(1px);
+    color: var(--primary-color);
+    letter-spacing: 0.7px;
+}
+
+.input-container input::placeholder {
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+.input-container input:focus-visible {
+    outline: none;
+}
+
+.input-container .gradient-border:first-child {
+    border-radius: 2rem;
+    width: 85%;
+}
+
+.input-container .gradient-border {
+    padding: 2px;
+    background: transparent;
+}
+
+.input-container .button {
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    backdrop-filter: blur(1px);
+    min-width: 58px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+}
+
+.input-container .button:hover,
+.input-container .button:focus {
+    animation: pulse .9s ease-out .3s infinite;
+    box-shadow: 0 0 0 1.5em rgba(255, 255, 255,0);
+}
+
+.input-container .button:focus-visible {
+    outline: 1px solid var(--primary-color);
+}
+
+.input-container input.error {
+    border-color: red;
+}
+
+.send-icon {
+    position: relative;
+    left: 2px;
+}
+
+.message-picture {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.3rem;
+    position: relative;
+    align-items: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.message-picture > * {
+    pointer-events: initial;
+}
+
+.message-picture.bot-message {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: 0.4s ease-in enterPicture;
+}
+
+.my-message .profile-picture {
+    min-width: 2.3rem;
+    height: 2.3rem;
+    background-image: url("./assets/images/usrpic.png");
+    background-color: #b2c3ff;
+    right: 44px;
+}
+
+.bot-message .profile-picture {
+    min-width: 2.7rem;
+    height: 2.7rem;
+    background-image: url("./assets/images/btpic.png");
+    background-color: #0052ee2b;
+    left: 32px;
+}
+
+.dot-typing {
+    position: relative;
+    left: -9983px;
+    top: 15px;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    animation: dotTyping 1.5s infinite linear;
+}
+
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: radial-gradient(ellipse at top left, var(--accent-color), var(--primary-color));
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    .input-container {
+        padding: 1.5rem;
+    }
+}
+
+/* Animations */
+
+@keyframes dotTyping {
+    0% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px -10px 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px -10px 0 0 var(--primary-color);
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 var(--primary-color), 9999px 0 0 0 var(--primary-color), 10014px 0 0 0 var(--primary-color);
+    }
+}
+
+@keyframes enterMessage {
+    0% {
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    80% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes enterPicture {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% { 
+        box-shadow: 0 0 0 0 var(--primary-color);
+    }
+    80% { 
+        box-shadow: 0 0 0 1.5em rgba(255, 255, 255,0);
+    }
+    100% { 
+        box-shadow: 0 0 0 1.5em rgba(255, 255, 255,0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; 
+        scale: 0;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes float {
+	0% {
+		filter: drop-shadow(drop-shadow(0 5px 15px #555555));
+		transform: translatey(0px) rotate(10deg);
+	}
+	50% {
+		filter: drop-shadow(drop-shadow(0 25px 15px #999999));
+		transform: translatey(-20px) rotate(-12deg);
+	}
+	100% {
+		filter: drop-shadow(drop-shadow(0 5px 15px #555555));
+		transform: translatey(0px) rotate(10deg);
+	}
+}
+
+@keyframes grow {
+    0% {width: 0;}
+    100% {width: 100%;}
+}
+
+/* Typewriting */
+.typewriter {
+    width: fit-content;
+    margin: 0 auto;
+    transition: opacity 0.3s ease-out;
+}
+
+.typewriter h1 {
+    color: var(--primary-color);
+    font-family: "SpaceMono";
+    text-transform: uppercase;
+    font-size: 18px;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid var(--primary-color); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    animation: 
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+    text-align: center;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
+}
